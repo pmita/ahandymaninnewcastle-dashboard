@@ -1,8 +1,12 @@
 "use client"
 
+// NEXT
+import { useRouter } from 'next/navigation';
 import { InputField } from "@/components/input-field";
 import { signInInputs } from "@/config/forms";
 import { Button, buttonVariants } from "@/components/ui/button";
+// HOOKS
+import { useSignIn } from "@/hooks/useSignIn";
 // PACKAGES
 import { useForm } from "react-hook-form";
 // UTILS
@@ -22,6 +26,8 @@ interface SignInFormErrors {
 
 export const SignInForm = () => {
   // STATE && VARIABLES
+  const router = useRouter();
+  const { signin, error ,isLoading } = useSignIn();
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormProps>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -32,8 +38,11 @@ export const SignInForm = () => {
   });
 
   // EVENTS
-  const onSubmit = ({email, password }: SignInFormProps) => {
+  const onSubmit = async ({email, password }: SignInFormProps) => {
     console.log(email, password);
+    await signin(email, password);
+
+    router.push('/dashboard');
   }
 
   return (
