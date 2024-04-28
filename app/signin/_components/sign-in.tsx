@@ -1,8 +1,16 @@
 "use client"
 
+// NEXT
+import { useRouter } from 'next/navigation';
+// REACT
+import { useCallback, useEffect } from 'react';
+// COMPONETNS
 import { InputField } from "@/components/input-field";
 import { signInInputs } from "@/config/forms";
 import { Button, buttonVariants } from "@/components/ui/button";
+// HOOKS
+import { useSignIn } from "@/hooks/useSignIn";
+import { useAuth } from "@/hooks/useAuth";
 // PACKAGES
 import { useForm } from "react-hook-form";
 // UTILS
@@ -22,6 +30,9 @@ interface SignInFormErrors {
 
 export const SignInForm = () => {
   // STATE && VARIABLES
+  const router = useRouter();
+  const { authedUser } = useAuth();
+  const { signin, error ,isLoading } = useSignIn();
   const { register, handleSubmit, formState: { errors } } = useForm<SignInFormProps>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -32,9 +43,20 @@ export const SignInForm = () => {
   });
 
   // EVENTS
-  const onSubmit = ({email, password }: SignInFormProps) => {
-    console.log(email, password);
-  }
+  const onSubmit = useCallback(async ({email, password }: SignInFormProps) => {
+    await signin(email, password);
+
+    if (!error && !isLoading) {
+      router.push('/dashboard');
+    }
+  }, []);
+
+  // USE EFFECTS
+  useEffect(() => {
+    if (authedUser) {
+      router.push('/dashboard');
+    }
+  }, [authedUser, router]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-[300px] flex flex-col justify-center items-center gap-5">
@@ -50,8 +72,12 @@ export const SignInForm = () => {
         />
       ))}
 
-      <Button className={cn(buttonVariants({ variant: "primary", size: "lg" }))}>
-        Sign In
+      <Button 
+        className={cn(buttonVariants({ variant: "primary", size: "lg" }))} 
+        type="submit" 
+        disabled={isLoading}
+      >
+        {isLoading ? 'Loading...' : 'Sign In'}
       </Button>
     </form> 
   );

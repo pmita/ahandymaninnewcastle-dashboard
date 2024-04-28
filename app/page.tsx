@@ -1,3 +1,8 @@
+"use client"
+
+// HOOKS
+import { useAuth } from "@/hooks/useAuth";
+
 export default function Home() {
   return (
     <main className="container  px-5 pt-5">
