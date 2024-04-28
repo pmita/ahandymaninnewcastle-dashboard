@@ -1,5 +1,7 @@
 // REACT
 import { useState, useEffect } from 'react';
+// HOOKS
+import { useAuth } from './useAuth';
 // FIREBASE
 import { auth } from '@/firebase/client-config';
 
@@ -8,6 +10,7 @@ export const useSignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isCancelled, setIsCancelled] = useState(false);
+  const { setAuthedUser } = useAuth();
 
   const signin = async (email: string, password: string) => {
     setIsLoading(true);
@@ -20,8 +23,10 @@ export const useSignIn = () => {
         throw new Error('User not found');
       }
 
+      setAuthedUser(authResponse.user);
+
       if (isCancelled) {
-        setIsCancelled(false);
+        setError(null);
         setIsLoading(false);
       }
 
