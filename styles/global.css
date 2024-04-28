@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 30 30 30; /* black */
+  --secondary: 255 255 255; /* white */
+  --alternate: 113 73 230; /* purple */
+  --danger: 243 78 78; /* red */
+  --muted: 241 245 249; /* gray */
+}
+
+.container{
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-parent{
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  &:hover .card-child{
+    transform: translateY(0%);
+  }
+}
+
+.card-child{
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease-in-out;
+}
