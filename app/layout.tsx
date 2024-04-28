@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 // UTILS
 import { roboto, poppins } from "@/utils/fonts";
+// CONTEXT
+import { AuthContextProvider } from "@/context/AuthContext";
+// UTILS
 import { cn } from "@/utils/helpers";
 // STYLES
 import '@/styles/global.css';
@@ -27,7 +30,9 @@ export default function RootLayout({
         
         )}
       >
-        {children}
+        <AuthContextProvider>
+          {children}
+        </AuthContextProvider>
       </body>
     </html>
   );
