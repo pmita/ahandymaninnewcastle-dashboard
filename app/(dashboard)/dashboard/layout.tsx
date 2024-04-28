@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 // UTILS
 import { roboto, poppins } from "@/utils/fonts";
 import { cn } from "@/utils/helpers";
@@ -27,7 +28,9 @@ export default function RootLayout({
         
         )}
       >
-    {children}
+        <div className="container">
+          {children}
+        </div>
       </body>
     </html>
   );
