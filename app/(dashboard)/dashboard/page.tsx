@@ -1,5 +1,6 @@
 import { firestore } from 'firebase/server/config';
 import { TableRow } from '../_components/table-row';
+import { TableContainer } from '../_components/table-container';
 
 export const getFirestoreData = async (collectionRef: string, filters = { status: null, sort: null }) => {
   const docsRef = firestore.collection(collectionRef);
@@ -46,28 +47,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: an
   console.log(data);
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-        <thead className="ltr:text-left rtl:text-right">
-          <tr>
-            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
-            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date of Birth</th>
-            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Role</th>
-            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Salary</th>
-            <th className="px-4 py-2"></th>
-          </tr>
-        </thead>
-
-        <tbody className="divide-y divide-gray-200">
-          {data && data.map((item: any) => (
-            <TableRow
-              key={item.id}
-              name={item.fullName}
-              email={item.email}
-              createdAt={item.createdAt.toString()}
-            />
-          ))}
-        </tbody>
-      </table>
+      <TableContainer data={data} /> 
     </div>
   )
 }
