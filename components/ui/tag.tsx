@@ -13,6 +13,8 @@ export const tagVariants = cva(
         primary: "bg-primary text-secondary border-primary",
         secondary: "bg-secondary text-primary border-secondary",
         alternate: "bg-alternate text-secondary border-alternate",
+        success: "bg-success text-secondary border-success",
+        accent: "bg-accent text-secondary border-accent",
       },
       size: {
         default: "py-[0.5rem] px-[1rem]",
