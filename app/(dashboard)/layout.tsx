@@ -25,7 +25,7 @@ export default function DashboardLayout({
       <div className="min-h-[100dvh] rounded-lg bg-gray-200">
         <SideMenu />
       </div>
-      <div className="min-h-[100dvh] rounded-lg bg-gray-200 lg:col-span-2 grid place-items-center">
+      <div className="min-h-[100dvh] rounded-lg bg-gray-200 lg:col-span-2 p-4 lg:p-8">
         {children}
       </div>
     </div>
