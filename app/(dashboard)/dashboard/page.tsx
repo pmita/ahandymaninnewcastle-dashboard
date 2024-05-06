@@ -1,7 +1,16 @@
+// DATA
+import { getCollectionData } from '@/data/firestore';
+// COMPONENTS
+import { TableContainer } from '../_components/table-container';
 
 
-export default function DashboardPage() {
+export default async function DashboardPage({ searchParams }: { searchParams: any }) {
+  // SERVER LAND
+  const data = await getCollectionData('queries', searchParams);
+
   return (
-    <h1>Welcome to Dashboard Page</h1>
+    <div className="overflow-x-auto">
+      <TableContainer data={data} /> 
+    </div>
   )
 }

@@ -35,7 +35,32 @@ export const useFirestore = () => {
     }finally {
       setIsLoading(false);
     }
-}
 
-  return { isLoading, hasQueryBeenSent, error, addDocument };
+  }
+
+  const updateDocument = async (collection:string,documentId: string,  data: object) => {
+    setIsLoading(true);
+    setError(null);
+
+    const docRef = firestore.collection(collection).doc(documentId);
+
+    try {
+      await docRef.update({
+        ...data,
+        lastUpdated: timestamp()
+      });
+    }catch(err) {
+      setError((err as Error).message);
+    }finally {
+      setIsLoading(false);
+    }
+  }
+
+  return { 
+    isLoading, 
+    hasQueryBeenSent, 
+    error, 
+    addDocument,
+    updateDocument
+  };
 }
