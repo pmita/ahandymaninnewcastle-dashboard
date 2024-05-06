@@ -1,5 +1,9 @@
-// COMPOPNENTS
-import { TableRow } from './table-row'
+// NEXT
+import Link from "next/link";
+// COMPONENTS
+import { buttonVariants } from "@/components/ui/button";
+// UTILS
+import { cn } from "@/utils/helpers";
 
 export const TableContainer = ({ data }: { data: any }) => {
   return (
@@ -15,6 +19,7 @@ export const TableContainer = ({ data }: { data: any }) => {
       {data && data.map((item: any) => (
         <TableRow
           key={item.id}
+          itemId={item.id}
           name={item.fullName}
           email={item.email}
           createdAt={item.createdAt.toString()}
@@ -22,5 +27,33 @@ export const TableContainer = ({ data }: { data: any }) => {
       ))}
 
     </table>
+  )
+}
+
+export const TableRow = ({
+  itemId,
+  name,
+  email,
+  createdAt,
+}: {
+  itemId?: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}) => {
+  return (
+    <tr>
+      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{name}</td>
+      <td className="whitespace-nowrap px-4 py-2 text-gray-700">{email}</td>
+      <td className="whitespace-nowrap px-4 py-2 text-gray-700">{createdAt}</td>
+      <td className="whitespace-nowrap px-4 py-2">
+      <Link 
+        className={cn(buttonVariants({ variant: 'alternateOutlined', size: 'sm' }))}
+        href={`/dashboard/${itemId}`}
+      >
+        Edit
+      </Link>
+    </td>
+    </tr>
   )
 }
