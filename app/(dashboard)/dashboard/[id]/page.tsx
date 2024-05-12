@@ -33,7 +33,7 @@ export default async function ItemPage({ params }: DashboardItemPageProps) {
             />
         </div>
         <ItemDetails item={itemData as queryDocumentType} />
-        <Comments status={itemData.status} comments={itemData.comments} />
+        <Comments itemId={itemData.id} status={itemData.status} comments={itemData.comments} />
       </div>
     </section>
   )
