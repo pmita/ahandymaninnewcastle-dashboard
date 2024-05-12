@@ -15,7 +15,7 @@ export const ItemDetails = ({ item }: { item: queryDocumentType }) => {
   const itemData = document || item;
   return (
     <>
-      <div className="reounded-lg bg-secondary flex flex-col justify-center items-stretch gap-4 p-2 lg:p-4">
+      <div className="rounded-lg bg-secondary flex flex-col justify-center items-stretch gap-4 p-2 lg:p-4">
         <ItemStatus id={item.id} status={itemData?.status} />
       </div>
     </>
