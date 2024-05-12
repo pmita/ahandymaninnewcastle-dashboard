@@ -22,3 +22,10 @@ export type queryCommentType = {
   createdAt: number | string;
   id: string;
 }
+
+export type queryComments = {
+  id: string;
+  content: string;
+  status: queryStatus;
+  createdAt: number | string;
+}

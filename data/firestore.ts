@@ -2,6 +2,7 @@
 import { firestore } from "@/firebase/server/config";
 // UTILS
 import { applyFirestoreFilters } from "@/utils/firestore";
+import { create } from "domain";
 
 export const getCollectionData = async (collectionRef: string, filters = { status: null, sort: null }) => {
   const docsRef = firestore.collection(collectionRef);
@@ -24,10 +25,16 @@ export const getCollectionDocument = async (collectionRef: string, documentRef: 
   const snapshot = await docRef.get();
   const docData = snapshot.data();
 
+  const docDataWithFormatedComments = docData?.comments.map((comment: any) => ({
+    ...comment,
+    createdAt: comment.createdAt.toDate() ?? null,
+  }))
+
   return {
     id: snapshot.id,
     ...docData,
     createdAt: docData?.createdAt.toDate() ?? null,
     lastUpdated: docData?.lastUpdated.toDate() ?? null,
+    comments: docDataWithFormatedComments ?? [],
   } as FirebaseFirestore.DocumentData | null;
 }
