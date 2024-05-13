@@ -10,6 +10,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-primary text-secondary border-[0.3rem] border-solid border-primary hover:bg-secondary hover:text-primary",
+        primaryOutlined: "bg-neutral text-primary border-[0.3rem] border-solid border-primary hover:bg-secondary hover:text-primary",
         secondary: "bg-secondary text-primary border-[0.3rem] border-solid border-primary hover:bg-primary hover:text-secondary",
         alternate: "bg-secondary text-alternate border-[0.3rem] border-solid border-secondasry hover:bg-alternate hover:text-secondary",
         alternateOutlined: "bg-alternate text-secondary border-[0.3rem] border-solid border-secondary hover:bg-secondary hover:text-alternate",
