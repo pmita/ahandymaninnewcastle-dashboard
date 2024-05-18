@@ -10,8 +10,6 @@ export default async function DashboardPage({ searchParams }: { searchParams: an
   // SERVER LAND
   const data = await getCollectionData('queries', searchParams);
 
-  console.log(data);
-
   return (
     <>
     <ContainerOptions displayType={searchParams.display} />

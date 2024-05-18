@@ -8,8 +8,6 @@ import { FormatedTime } from "@/components/formated-time";
 import { cn, truncate } from "@/utils/helpers";
 
 export const GridContainer = ({ data}: { data: any }) => {
-
-  console.log(data);
   return (
     <div className="bg-secondary grid grid-cols-1 grid-rows-[350px] gap-4 lg:grid-cols-2 lg:gap-8 min-h-[100dvh] outline-dashed">
       {data.map((item: any) => (
