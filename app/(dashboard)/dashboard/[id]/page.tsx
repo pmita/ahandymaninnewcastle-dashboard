@@ -1,10 +1,8 @@
-
 // DATA
 import { getCollectionDocument } from "@/data/firestore";
 // COMPONENTS
-import { ItemDetails } from "./_components/item-details";
 import { ItemInfo } from "./_components/item-info";
-import { Comments } from "./_components/comments";
+import { RealTimeContainer } from "./_components/realtime-container";
 // TYPES
 import { queryDocumentType } from "@/types/firestore";
 
@@ -32,8 +30,7 @@ export default async function ItemPage({ params }: DashboardItemPageProps) {
               additionalInfo={itemData?.additionalInfo}
             />
         </div>
-        <ItemDetails item={itemData as queryDocumentType} />
-        <Comments itemId={itemData.id} status={itemData.status} comments={itemData.comments} />
+        <RealTimeContainer item={itemData as queryDocumentType} />
       </div>
     </section>
   )
