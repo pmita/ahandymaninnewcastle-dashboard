@@ -6,9 +6,9 @@ import { ContainerCTA } from "./container-cta";
 // UTILS
 import { truncate } from "@/utils/helpers";
 
-export const GridContainer = ({ data}: { data: any }) => {
+export const GridContainer = ({ data }: { data: any }) => {
   return (
-    <div className="grid grid-cols-1 auto-rows-[285px] gap-4 lg:grid-cols-2 lg:gap-8 min-h-[100dvh] mt-4 p-4">
+    <div className="grid grid-cols-1 auto-rows-[285px] gap-4 lg:grid-cols-2 lg:gap-8 min-h-[100dvh] mt-4">
       {data.map((item: any) => (
         <Card key={item.id} className="bg-secondary flex flex-col justify-center items-stretch">
           <CardHeader className="flex-1 flex-row justify-between items-center">
