@@ -4,7 +4,7 @@ import { getCollectionData } from '@/data/firestore';
 import { TableContainer } from '../_components/table-container';
 import { ContainerOptions } from '../_components/container-options';
 import { GridContainer } from '../_components/grid-container';
-import { ItemsOptions } from '../_components/item-options';
+import { QueryOptions } from '../_components/query-options';
 
 
 export default async function DashboardPage({ searchParams }: { searchParams: any }) {
@@ -31,7 +31,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: an
   return (
     <>
       <section className="flex flex-row justify-between items-stetch flex-wrap">
-        <ItemsOptions itemStatus={searchParams.status} />
+        <QueryOptions itemStatus={searchParams.status} />
         <ContainerOptions displayType={searchParams.display} />
       </section>
       {renderContainer(searchParams.display)}

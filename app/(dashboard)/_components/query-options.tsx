@@ -8,7 +8,7 @@ import { useCallback, useState } from "react"
 import { OptionTab } from "./option-tab";
 
 
-export const ItemsOptions = ({ itemStatus }: { itemStatus: string }) => {
+export const QueryOptions = ({ itemStatus }: { itemStatus: string }) => {
   // STATE
   const [status, setStatus] = useState(itemStatus || 'ALL');
   const searchParams = useSearchParams();
