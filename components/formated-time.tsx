@@ -1,7 +1,14 @@
-// UTILS
+import React from 'react';
 import { cn } from '@/utils/helpers';
 
-export const FormatedTime = ({ time, className }: { time: Date | string | null, className?: string }) => {
+interface FirestoreTimestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
+type TimeInput = Date | string | FirestoreTimestamp | null;
+
+export const FormatedTime = ({ time, className }: { time: TimeInput, className?: string }) => {
   // Function to format date
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('en-GB', {
@@ -10,20 +17,23 @@ export const FormatedTime = ({ time, className }: { time: Date | string | null, 
   };
 
   // Convert input to Date object if it's not already
-  let date;
+  let date: Date | null = null;
+
   if (typeof time === 'string') {
     date = new Date(time);
-  } else {
-    date = time as Date; // Type assertion to ensure 'date' is of type 'Date'
+  } else if (time instanceof Date) {
+    date = time;
+  } else if (time && typeof time === 'object' && 'seconds' in time && 'nanoseconds' in time) {
+    date = new Date(time.seconds * 1000 + time.nanoseconds / 1000000);
   }
 
   // Check if the date is valid
-  const isValidDate = date !== null && !isNaN(date.getTime());
+  const isValidDate = date instanceof Date && !isNaN(date.getTime());
 
   // Render formatted date if valid, otherwise render error message
   return (
     <time className={cn("text-xs text-neutral", className)}>
-      {isValidDate ? formatDate(date) : 'Invalid date'}
+      {isValidDate ? formatDate(date!) : 'Invalid date'}
     </time>
   );
 };
