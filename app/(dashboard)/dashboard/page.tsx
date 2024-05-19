@@ -16,7 +16,7 @@ export default async function DashboardPage({ searchParams }: { searchParams: an
     switch(displayOption) {
       case 'list':
         return (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto mt-4 p-4">
             < TableContainer data={data} /> 
           </div>
         );
