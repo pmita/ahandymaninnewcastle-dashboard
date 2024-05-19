@@ -1,62 +1,72 @@
 // NEXT
-import Link from "next/link";
+import Link from "next/link"
 // COMPONENTS
-import { buttonVariants } from "@/components/ui/button";
-import { FormatedTime } from "@/components/formated-time";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { FormatedTime } from "@/components/formated-time"
+import { Status } from "@/components/status"
+import { buttonVariants } from "@/components/ui/button"
 // UTILS
-import { cn } from "@/utils/helpers";
+import { cn } from "@/utils/helpers"
+
 
 export const TableContainer = ({ data }: { data: any }) => {
-  return (
-    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-      <thead className="ltr:text-left rtl:text-right">
-        <TableRow
-          name="Name"
-          email="Email"
-          createdAt="createdAt"
-          />
-      </thead>
-
-      {data && data.map((item: any) => (
-        <TableRow
-          key={item.id}
-          itemId={item.id}
-          name={item.fullName}
-          email={item.email}
-          createdAt={item.createdAt.toString()}
-        />
-      ))}
-
-    </table>
-  )
+    return (
+        <Table className="divide-y-2 divide-gray-200 bg-white">
+            <TableContainerHeader />
+            <TableBody>
+                {data && data.map((item: any) => (
+                    <TableRow key={item.id}>
+                        <TableCell>
+                            {item.fullName}
+                        </TableCell>
+                        <TableCell>
+                            {item.email}
+                        </TableCell>
+                        <TableCell>
+                            <FormatedTime time={item.createdAt} />
+                        </TableCell>
+                        <TableCell className="text-center">
+                            <Status status={item.status} />
+                        </TableCell>
+                        <TableCell className="flex flex-row gap-2">
+                            <TableContainerCTA itemId={item.id} />
+                        </TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+    )
 }
 
-export const TableRow = ({
-  itemId,
-  name,
-  email,
-  createdAt,
-}: {
-  itemId?: string;
-  name: string;
-  email: string;
-  createdAt: any;
-}) => {
-  return (
-    <tr>
-      <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{name}</td>
-      <td className="whitespace-nowrap px-4 py-2 text-gray-700">{email}</td>
-      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-        <FormatedTime time={createdAt} />
-      </td>
-      <td className="whitespace-nowrap px-4 py-2">
-      <Link 
-        className={cn(buttonVariants({ variant: 'alternateOutlined', size: 'sm' }))}
-        href={`/dashboard/${itemId}`}
-      >
-        Edit
-      </Link>
-    </td>
-    </tr>
-  )
+export const TableContainerHeader = () => {
+    return (
+        <TableHeader>
+            <TableRow>
+                <TableHead>{"Full Name"}</TableHead>
+                <TableHead>{"Email"}</TableHead>
+                <TableHead>{"Date"}</TableHead>
+                <TableHead>{"Status"}</TableHead>
+                <TableHead>{"Actions"}</TableHead>
+            </TableRow>
+        </TableHeader>
+    )
+}
+
+export const TableContainerCTA = ({ itemId }: { itemId: string }) => {
+    return (
+        <>
+            <Link 
+                className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
+                href={`/dashboard/${itemId}`}
+            >
+                    Edit
+            </Link>
+            <Link 
+                className={cn(buttonVariants({ variant: 'primaryOutlined', size: 'sm' }))}
+                href={`/dashboard/${itemId}`}
+            >
+                Quick View
+            </Link>
+        </>
+    )
 }
