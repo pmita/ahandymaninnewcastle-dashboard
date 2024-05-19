@@ -9,6 +9,7 @@ export type queryDocumentType = {
   createdAt: number | string;
   lastUpdated: number | string;
   status: queryStatus;
+  comments?: queryComments[] | [];
 }
 
 export enum queryStatus {
@@ -20,6 +21,7 @@ export enum queryStatus {
 export type queryCommentType = {
   content: string;
   createdAt: number | string;
+  status: queryStatus;
   id: string;
 }
 

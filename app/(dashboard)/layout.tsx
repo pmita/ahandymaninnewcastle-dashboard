@@ -21,11 +21,9 @@ export default function DashboardLayout({
         </div>
       </>
     )}>
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-      <div className="min-h-[100dvh] rounded-lg bg-gray-200">
-        <SideMenu />
-      </div>
-      <div className="min-h-[100dvh] rounded-lg bg-gray-200 lg:col-span-2 p-4 lg:p-8">
+    <div className="container h-full w-full flex flex-col justify-start items-center">
+      <SideMenu />
+      <div className="container min-h-[90dvh] rounded-lg bg-gray-200 lg:col-span-2 p-4 lg:p-8">
         {children}
       </div>
     </div>

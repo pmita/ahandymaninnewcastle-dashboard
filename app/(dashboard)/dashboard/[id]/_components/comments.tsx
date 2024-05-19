@@ -87,8 +87,8 @@ export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentS
 
       <Button
         className={cn(buttonVariants({ variant: "primary", size: "sm" }))}
-        onClick={() => console.log('clicked')}
         disabled={isLoading}
+        type="submit"
       >
         {isLoading ? 'Adding...' : 'Add Comment'}
       </Button>
