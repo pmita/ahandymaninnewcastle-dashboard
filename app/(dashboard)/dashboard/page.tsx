@@ -10,19 +10,27 @@ export default async function DashboardPage({ searchParams }: { searchParams: an
   // SERVER LAND
   const data = await getCollectionData('queries', searchParams);
 
+  // FUNCTIONS
+  const renderContainer = (displayOption: string) => {
+    switch(displayOption) {
+      case 'list':
+        return (
+          <div className="overflow-x-auto">
+          < TableContainer data={data} /> 
+          </div>
+        );
+      case 'grid':
+      default:
+        return (
+          <GridContainer data={data} />
+        );
+    }
+  }
+
   return (
     <>
-    <ContainerOptions displayType={searchParams.display} />
-
-    {searchParams.display === 'grid' && (
-      <GridContainer data={data} />
-    )}
-
-    {searchParams.display === 'list' && (
-      <div className="overflow-x-auto">
-        <TableContainer data={data} /> 
-      </div>
-    )}
+      <ContainerOptions displayType={searchParams.display} />
+      {renderContainer(searchParams.display)}
     </>
   )
 }
