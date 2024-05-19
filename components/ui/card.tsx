@@ -12,7 +12,7 @@ export const Card = React.forwardRef<HTMLDivElement, ICard>(({ className, ...pro
     <div
       ref={ref}
       className={cn(
-        "rounded-[6px] border bg-neutral text-secondary shadow-sm",
+        "rounded-[6px] border bg-neutral text-primary shadow-sm",
         className
       )}
       {...props}
@@ -26,7 +26,7 @@ export const CardHeader = React.forwardRef<HTMLHeadingElement, ICard>(({ classNa
     <header
       ref={ref}
       className={cn(
-        "flex flex-col gap-5 p-6",
+        "flex flex-col gap-5 p-4",
         className
       )}
       {...props}
@@ -40,7 +40,7 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, ICard>(({ classNam
     <h2
       ref={ref}
       className={cn(
-        "text-sm text-secondary font-bold",
+        "text-sm text-primary font-bold",
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ export const CardDescription = React.forwardRef<HTMLHeadingElement, ICard>(({ cl
     <h2
       ref={ref}
       className={cn(
-        "text-sm text-secondary font-normal",
+        "text-sm text-primary font-normal p-4",
         className
       )}
       {...props}
@@ -68,7 +68,7 @@ export const CardContent = React.forwardRef<HTMLDivElement, ICard>(({ className,
     <div
       ref={ref}
       className={cn(
-        "p-6 pt-0",
+        "p-4 pt-0",
         className
       )}
       {...props}
@@ -82,7 +82,7 @@ export const CardFooter = React.forwardRef<HTMLDivElement, ICard>(({ className, 
     <div
       ref={ref}
       className={cn(
-        "flex items-center p-6 pt-0",
+        "flex items-center p-4",
         className
       )}
       {...props}

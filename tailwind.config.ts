@@ -13,6 +13,7 @@ const config: Config = {
         secondary: 'rgb(var(--secondary))',
         alternate : 'rgb(var(--alternate))',
         accent : 'rgb(var(--accent))',
+        highlight : 'rgb(var(--highlight))',
         success : 'rgb(var(--success))',
         danger: 'rgb(var(--danger))',
         muted: 'rgb(var(--muted))',

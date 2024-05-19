@@ -1,8 +1,8 @@
 "use client"
 
 // COMPONENTS
-import { Tag } from "@/components/ui/tag"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { Status } from "@/components/status"
 // HOOKS
 import { useForm } from "react-hook-form"
 import { useFirestore } from "@/hooks/useFirestore"
@@ -16,30 +16,12 @@ type ItemStatusProps = {
   status: queryStatus;
 }
 
-const selectVariant = (status: string) => {
-  switch (status) {
-    case queryStatus.INITIAL:
-      return 'accent';
-    case queryStatus.PROGRESSED:
-      return 'alternate';
-    case queryStatus.COMPLETED:
-      return 'success';
-    default:
-      return 'accent';
-  }
-}
-
 export const ItemStatus = ({ id, status }: ItemStatusProps) => {
   return (
     <>
       <div className="flex flex-row justify-center items-center gap-4">
         <span>Status</span>
-        <Tag 
-          variant={selectVariant(status)}
-          size="sm"
-        >
-          {status}
-        </Tag>
+        <Status status={status} />
       </div>
 
     <UpdateStatus id={id} status={status} />

@@ -15,6 +15,7 @@ export const tagVariants = cva(
         alternate: "bg-alternate text-secondary border-alternate",
         success: "bg-success text-secondary border-success",
         accent: "bg-accent text-secondary border-accent",
+        highlight: "bg-highlight text-secondary border-highlight",
       },
       size: {
         default: "py-[0.5rem] px-[1rem]",

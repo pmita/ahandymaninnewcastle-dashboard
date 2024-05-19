@@ -24,10 +24,16 @@ export const getCollectionDocument = async (collectionRef: string, documentRef: 
   const snapshot = await docRef.get();
   const docData = snapshot.data();
 
+  const docDataWithFormatedComments =  docData?.comments ? docData?.comments.map((comment: any) => ({
+    ...comment,
+    createdAt: comment.createdAt.toDate() ?? null,
+  })) : [];
+
   return {
     id: snapshot.id,
     ...docData,
     createdAt: docData?.createdAt.toDate() ?? null,
     lastUpdated: docData?.lastUpdated.toDate() ?? null,
+    comments: docDataWithFormatedComments ?? [],
   } as FirebaseFirestore.DocumentData | null;
 }

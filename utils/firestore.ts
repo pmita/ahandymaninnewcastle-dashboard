@@ -1,5 +1,5 @@
 export const applyFirestoreFilters =  (ref: any, { status, sort }: { status: any, sort: any }) => {
-  if ( status ) {
+  if ( status && ['INITIAL', 'PROGRESSED', 'COMPLETED'].includes(status)) {
     ref = ref.where('status', '==', status);
   }
 
