@@ -10,3 +10,12 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
+
+export const tooglePrimaryButtonVariant = (shouldShowPrimary: boolean) => {
+  switch(shouldShowPrimary) {
+    case true:
+      return 'primary';
+    case false:
+      return 'primaryOutlined';
+  }
+}
