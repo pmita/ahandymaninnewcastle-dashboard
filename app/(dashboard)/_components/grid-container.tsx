@@ -1,11 +1,10 @@
-
 // COMPONENTS
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { Status } from "@/components/status";
 import { FormatedTime } from "@/components/formated-time";
+import { ContainerCTA } from "./container-cta";
 // UTILS
-import { cn, truncate } from "@/utils/helpers";
+import { truncate } from "@/utils/helpers";
 
 export const GridContainer = ({ data}: { data: any }) => {
   return (
@@ -20,16 +19,7 @@ export const GridContainer = ({ data}: { data: any }) => {
             {truncate(item.additionalInfo, 150)}
           </CardContent>
           <CardFooter className="flex-1 flex-col justify-center items-stretch gap-2">
-            <Button
-              className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
-            >
-              Edit
-            </Button>
-            <Button
-              className={cn(buttonVariants({ variant: 'primaryOutlined', size: 'sm' }))}
-            >
-              Quick View
-            </Button>
+            <ContainerCTA itemId={item.id} />
           </CardFooter>
         </Card>
       ))}

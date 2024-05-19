@@ -1,12 +1,8 @@
-// NEXT
-import Link from "next/link"
 // COMPONENTS
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { FormatedTime } from "@/components/formated-time"
 import { Status } from "@/components/status"
-import { buttonVariants } from "@/components/ui/button"
-// UTILS
-import { cn } from "@/utils/helpers"
+import { ContainerCTA } from "./container-cta"
 
 
 export const TableContainer = ({ data }: { data: any }) => {
@@ -29,7 +25,7 @@ export const TableContainer = ({ data }: { data: any }) => {
                             <Status status={item.status} />
                         </TableCell>
                         <TableCell className="flex flex-row gap-2">
-                            <TableContainerCTA itemId={item.id} />
+                            <ContainerCTA itemId={item.id} />
                         </TableCell>
                     </TableRow>
                 ))}
@@ -49,24 +45,5 @@ export const TableContainerHeader = () => {
                 <TableHead>{"Actions"}</TableHead>
             </TableRow>
         </TableHeader>
-    )
-}
-
-export const TableContainerCTA = ({ itemId }: { itemId: string }) => {
-    return (
-        <>
-            <Link 
-                className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
-                href={`/dashboard/${itemId}`}
-            >
-                    Edit
-            </Link>
-            <Link 
-                className={cn(buttonVariants({ variant: 'primaryOutlined', size: 'sm' }))}
-                href={`/dashboard/${itemId}`}
-            >
-                Quick View
-            </Link>
-        </>
-    )
+    );
 }
