@@ -6,14 +6,13 @@ import { queryStatus } from "@/types/firestore";
 
 const selectVariant = (status: string) => {
   switch (status) {
-    case queryStatus.INITIAL:
-      return 'accent';
     case queryStatus.PROGRESSED:
-      return 'alternate';
-    case queryStatus.COMPLETED:
-      return 'success';
-    default:
       return 'accent';
+    case queryStatus.COMPLETED:
+        return 'success';
+    case queryStatus.INITIAL:
+    default:
+      return 'highlight';
   }
 }
 
