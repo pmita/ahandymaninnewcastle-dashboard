@@ -29,10 +29,11 @@ export const Comments = ({
   comments,
   canAddComments = false
 }: CommentsProps) => {
-  if (!comments) return null;
+  if (!comments) return <h1 className="text-center font-bold text-primary">No comments yet</h1>;
 
   return (
     <>
+      <h1 className="font-bold text-primary">Comments</h1>
       {comments.map((comment: any) => (
         <Card key={comment.id}>
           <CardDescription>{comment.content}</CardDescription>

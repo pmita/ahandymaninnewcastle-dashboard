@@ -29,7 +29,7 @@ export const TableContainer = ({ data }: { data: any }) => {
                         <TableCell className="text-center">
                             <Status status={item.status} />
                         </TableCell>
-                        <TableCell className="flex flex-row gap-2">
+                        <TableCell className="flex flex-row justify-center gap-2">
                             <Link 
                                 className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
                                 href={`/dashboard/${item.id}`}

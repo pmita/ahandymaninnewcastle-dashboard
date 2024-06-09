@@ -3,8 +3,8 @@
 import { useState, useCallback } from "react";
 // COMPONENTS
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Comments } from "../dashboard/[id]/_components/comments";
-import { ItemInfo } from "../dashboard/[id]/_components/item-info";
+import { Comments } from "../[id]/_components/comments";
+import { ItemInfo } from "../[id]/_components/item-info";
 import { 
     OverlayPanelContainer, 
     OverlayPanelDescription, 

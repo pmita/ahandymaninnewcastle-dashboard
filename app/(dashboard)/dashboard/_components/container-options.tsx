@@ -7,13 +7,13 @@ import { useCallback, useState } from "react";
 // COMPONENTS
 import { OptionTab } from "./option-tab";
 
-export type ContainerOptionsProps = {
+export type ViewOptionsProps = {
   displayType: string;
 }
 
-export const ContainerOptions = ({
+export const ViewOptions = ({
   displayType,
-}: ContainerOptionsProps) => {
+}: ViewOptionsProps) => {
   // STATE && VARIABLES
   const [display, setDisplay] = useState(displayType || 'grid');
   const searchParams = useSearchParams();

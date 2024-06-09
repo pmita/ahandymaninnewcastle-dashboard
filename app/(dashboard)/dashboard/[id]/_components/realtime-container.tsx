@@ -18,7 +18,6 @@ export const RealTimeContainer = ({ item }: { item: queryDocumentType }) => {
         <ItemStatus id={item.id} status={itemData?.status} />
       </div>
       <div className="rounded-lg bg-secondary lg:col-span-2 p-4 flex flex-col gap-4 overflow-y-scroll">
-        <h1 className="text-bold text-primary">Comments</h1>
         <Comments 
           itemId={itemData.id} 
           status={itemData.status} 
