@@ -17,7 +17,15 @@ export const RealTimeContainer = ({ item }: { item: queryDocumentType }) => {
       <div className="rounded-lg bg-secondary flex flex-col justify-center items-stretch gap-4 p-2 lg:p-4">
         <ItemStatus id={item.id} status={itemData?.status} />
       </div>
-      <Comments itemId={itemData.id} status={itemData.status} comments={itemData.comments} />
+      <div className="rounded-lg bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
+        <h1 className="text-bold text-primary">Comments</h1>
+        <Comments 
+          itemId={itemData.id} 
+          status={itemData.status} 
+          comments={itemData.comments} 
+          canAddComments={true}
+        />
+      </div>
     </>
   )
 }

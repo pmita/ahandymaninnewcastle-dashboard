@@ -20,18 +20,19 @@ type CommentsProps = {
   itemId: string;
   status: queryStatus;
   comments: queryComments[] | [];
+  canAddComments?: boolean
 }
 
 export const Comments = ({
   itemId,
   status,
-  comments
+  comments,
+  canAddComments = false
 }: CommentsProps) => {
   if (!comments) return null;
 
   return (
-    <div className="rounded-lg bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
-      <h1 className="text-bold">Comments</h1>
+    <>
       {comments.map((comment: any) => (
         <Card key={comment.id}>
           <CardDescription>{comment.content}</CardDescription>
@@ -42,8 +43,8 @@ export const Comments = ({
         </Card>
       ))}
 
-      <AddComment itemId={itemId} currentStatus={status} />
-    </div>
+      {canAddComments && <AddComment itemId={itemId} currentStatus={status} />}
+    </>
   );
 }
 
