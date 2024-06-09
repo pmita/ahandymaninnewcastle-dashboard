@@ -2,15 +2,20 @@
 
 import { useState, useCallback } from "react";
 // COMPONENTS
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/aside-dialog"
-import { Status } from "@/components/status";
-import { FormatedTime } from "@/components/formated-time";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Comments } from "../dashboard/[id]/_components/comments";
+import { ItemInfo } from "../dashboard/[id]/_components/item-info";
+import { 
+    OverlayPanelContainer, 
+    OverlayPanelDescription, 
+    OverlayPanelHeader, 
+    OverlayPanelOverlay, 
+    OverlayPanelSection, 
+    OverlayPanelTitle, 
+    OverlayPanelWrapper 
+} from "@/components/ui/overlay-panel";
 // UTILS
 import { cn } from "@/utils/helpers";
-import { Comments } from "../dashboard/[id]/_components/comments";
-import { ItemStatus } from "../dashboard/[id]/_components/item-status";
-import { ItemInfo } from "../dashboard/[id]/_components/item-info";
 
 export const QuickViewButton = ({ item }: { item: any }) => {
     // STATE && VARIABLES
@@ -36,36 +41,40 @@ export const QuickViewButton = ({ item }: { item: any }) => {
     )
 }
 
-
 export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => void}) => {
     return (
-        <DialogContent className="bg-secondary">
-            <DialogHeader>
-                <DialogTitle className="flex flex-row justify-between items-center p-2">
-                    <Button 
-                        className={cn(buttonVariants({ variant: "primary" }))}
-                        onClick={onClick}
-                    >
-                        Close
-                    </Button>
-                </DialogTitle>
-                <ItemInfo
-                    fullName={item?.fullName}
-                    email={item?.email}
-                    mobile={item?.mobile}
-                    location={item?.location}
-                    additionalInfo={item?.additionalInfo}
-                />
-            </DialogHeader>
-            <DialogDescription>
-                <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
-                    <Comments
-                        itemId={item.id}
-                        status={item.status}
-                        comments={item.comments}
-                    />
-                </div>
-            </DialogDescription>
-        </DialogContent>
+        <OverlayPanelWrapper>
+            <OverlayPanelContainer>
+                <OverlayPanelOverlay onClick={onClick} />
+                <OverlayPanelSection>
+                    <OverlayPanelHeader>
+                        <OverlayPanelTitle className="p-4">
+                            <Button 
+                                className={cn(buttonVariants({ variant: "primary" }))}
+                                onClick={onClick}
+                            >
+                                Close
+                            </Button>
+                        </OverlayPanelTitle>
+                        <ItemInfo
+                            fullName={item?.fullName}
+                            email={item?.email}
+                            mobile={item?.mobile}
+                            location={item?.location}
+                            additionalInfo={item?.additionalInfo}
+                        />
+                    </OverlayPanelHeader>
+                    <OverlayPanelDescription>
+                        <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
+                            <Comments
+                                itemId={item.id}
+                                status={item.status}
+                                comments={item.comments}
+                            />
+                        </div>
+                    </OverlayPanelDescription>
+                </OverlayPanelSection>
+            </OverlayPanelContainer>
+        </OverlayPanelWrapper>
     )
 }

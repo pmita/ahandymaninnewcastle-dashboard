@@ -32,6 +32,7 @@ export const GridContainer = ({ data }: { data: any }) => {
           </CardFooter>
         </Card>
       ))}
+
     </div>
   )
 }
