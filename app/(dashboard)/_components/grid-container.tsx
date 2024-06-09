@@ -1,10 +1,13 @@
+// NEXT
+import Link from "next/link"
 // COMPONENTS
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
 import { Status } from "@/components/status";
 import { FormatedTime } from "@/components/formated-time";
-import { ContainerCTA } from "./container-cta";
+import { QuickViewButton } from "./quick-view";
 // UTILS
-import { truncate } from "@/utils/helpers";
+import { cn, truncate } from "@/utils/helpers";
 
 export const GridContainer = ({ data }: { data: any }) => {
   return (
@@ -19,7 +22,13 @@ export const GridContainer = ({ data }: { data: any }) => {
             {truncate(item.additionalInfo, 150)}
           </CardContent>
           <CardFooter className="flex-1 flex-col justify-center items-stretch gap-2">
-            <ContainerCTA itemId={item.id} />
+            <Link 
+                className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
+                href={`/dashboard/${item.id}`}
+            >
+                Edit
+            </Link>
+            <QuickViewButton item={item} />
           </CardFooter>
         </Card>
       ))}
