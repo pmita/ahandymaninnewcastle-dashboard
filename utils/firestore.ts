@@ -1,4 +1,7 @@
-export const applyFirestoreFilters =  (ref: any, { status, sort }: { status: any, sort: any }) => {
+// TYPES
+import { IFirestoreFilters } from "@/types/firestore";
+
+export const applyFirestoreFilters =  (ref: any, { status = null, sort = null }: IFirestoreFilters) => {
   if ( status && ['INITIAL', 'PROGRESSED', 'COMPLETED'].includes(status)) {
     ref = ref.where('status', '==', status);
   }

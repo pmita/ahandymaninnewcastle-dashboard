@@ -1,5 +1,5 @@
 // DATA
-import { getCollectionDocument } from "@/data/firestore";
+import { getCollectionData, getDocumentData } from "@/data/firestore";
 // COMPONENTS
 import { ItemInfo } from "./_components/item-info";
 import { RealTimeContainer } from "./_components/realtime-container";
@@ -14,7 +14,9 @@ interface DashboardItemPageProps {
 
 export default async function ItemPage({ params }: DashboardItemPageProps) {
   // SERVER LAND
-  const itemData = await getCollectionDocument('queries', params.id);
+  const { id: itemId } = params;
+  const itemData = await getDocumentData('queries', itemId);
+  const itemComments = await getCollectionData(`queries/${itemId}/comments`, { sort: 'desc' })
 
   if (!itemData) return null;
 
