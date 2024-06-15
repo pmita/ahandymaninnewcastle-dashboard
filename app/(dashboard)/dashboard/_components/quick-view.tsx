@@ -14,8 +14,12 @@ import {
     OverlayPanelTitle, 
     OverlayPanelWrapper 
 } from "@/components/ui/overlay-panel";
+// HOOKS
+import { useCollectionSnapshot } from "@/hooks/useCollectionSnapshot";
 // UTILS
 import { cn } from "@/utils/helpers";
+// TYPES
+import { queryDocumentType } from "@/types/firestore";
 
 export const QuickViewButton = ({ item }: { item: any }) => {
     // STATE && VARIABLES
@@ -42,6 +46,9 @@ export const QuickViewButton = ({ item }: { item: any }) => {
 }
 
 export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => void}) => {
+    // STATE && VARIABLES
+    const { data: realtimeComments } = useCollectionSnapshot(`queries/${item.id}/comments`);
+
     return (
         <OverlayPanelWrapper>
             <OverlayPanelContainer>
@@ -56,20 +63,15 @@ export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => v
                                 Close
                             </Button>
                         </OverlayPanelTitle>
-                        <ItemInfo
-                            fullName={item?.fullName}
-                            email={item?.email}
-                            mobile={item?.mobile}
-                            location={item?.location}
-                            additionalInfo={item?.additionalInfo}
-                        />
+                        <ItemInfo itemData={item as queryDocumentType} />
                     </OverlayPanelHeader>
                     <OverlayPanelDescription>
                         <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
                             <Comments
                                 itemId={item.id}
                                 status={item.status}
-                                comments={item.comments}
+                                comments={realtimeComments}
+                                canAddComments={false}
                             />
                         </div>
                     </OverlayPanelDescription>

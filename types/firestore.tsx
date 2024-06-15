@@ -33,10 +33,10 @@ export type queryComments = {
 }
 
 export interface IComments {
-  comments: commentType[];
+  comments: firestoreComment[];
 }
 
-export type commentType = {
+export type firestoreComment = {
   content: string;
   createdAt: number | string;
   status: queryStatus;

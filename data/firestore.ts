@@ -6,18 +6,18 @@ import { applyFirestoreFilters } from "@/utils/firestore";
 import { IFirestoreFilters } from "@/types/firestore";
 
 export const getCollectionData = async (collectionRef: string, filters: IFirestoreFilters) => {
-  const docsRef = firestore.collection(collectionRef);
+  const docsRef = firestore.collection(collectionRef).orderBy('createdAt', 'asc');;
 
   const docsWithFilters = applyFirestoreFilters(docsRef, filters);
 
-  const snapshot = await docsWithFilters.get();
+  const snapshot = await docsRef.get();
   const data = snapshot.docs.map((doc: any) => ({
     id: doc.id,
     ...doc.data(),
-    createdAt: doc.data().createdAt.toDate(),
-    lastUpdated: doc.data().lastUpdated.toDate(),
+    createdAt: doc.data().createdAt.toDate() ?? null,
+    lastUpdated: doc.data().lastUpdated.toDate() ?? null,
   }));
-  return data;
+  return data as FirebaseFirestore.DocumentData[] | [];
 }
 
 export const getDocumentData = async (collectionRef: string, documentRef: string) => {

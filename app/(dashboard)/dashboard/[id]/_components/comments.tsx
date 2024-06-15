@@ -12,14 +12,14 @@ import TextAreaField from "@/components/text-area";
 import { useForm } from "react-hook-form";
 import { useFirestore } from "@/hooks/useFirestore";
 // TYPES
-import { queryComments, queryStatus } from "@/types/firestore";
+import { queryStatus, firestoreComment } from "@/types/firestore";
 // UTILS
 import { cn } from "@/utils/helpers";
 
 type CommentsProps = {
   itemId: string;
   status: queryStatus;
-  comments: queryComments[] | [];
+  comments: firestoreComment[];
   canAddComments?: boolean
 }
 
@@ -31,15 +31,16 @@ export const Comments = ({
 }: CommentsProps) => {
   if (!comments) return <h1 className="text-center font-bold text-primary">No comments yet</h1>;
 
+  // console.log(comments)
   return (
     <>
       <h1 className="font-bold text-primary">Comments</h1>
-      {comments.map((comment: any) => (
+      {comments.map((comment: firestoreComment) => (
         <Card key={comment.id}>
           <CardDescription>{comment.content}</CardDescription>
           <CardFooter className="flex-row justify-between">
             <Status status={comment.status} />
-            <FormatedTime time={comment.createdAt} />
+            {/* <FormatedTime time={comment.createdAt} /> */}
           </CardFooter>
         </Card>
       ))}
@@ -55,8 +56,8 @@ type AddCommentProps = {
 
 export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentStatus: queryStatus }) => {
   // STATE && VARIABLES
-  const { error: addingError, isLoading, addComment } = useFirestore();
-  const { register, handleSubmit, formState: { errors } } = useForm<AddCommentProps>({
+  const { error: addingError, isLoading, addDocument } = useFirestore();
+  const { register, reset, handleSubmit, formState: { errors } } = useForm<AddCommentProps>({
     defaultValues: {
       content: ''
     }
@@ -66,12 +67,13 @@ export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentS
   const onSubmit = useCallback(async ({ content }: AddCommentProps) => {
     const commentToAdd = {
       content,
-      id: Math.random(),
       status: currentStatus,
     }
 
-    await addComment('queries', itemId , commentToAdd);
-  }, [addComment, itemId]);
+    await addDocument(`queries/${itemId}/comments`, commentToAdd);
+
+    reset();
+  }, [addDocument, itemId]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start items-start gap-4">
