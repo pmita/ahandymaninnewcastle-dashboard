@@ -1,7 +1,8 @@
 // REACT
 import { useState, useEffect } from 'react';
 // FIREBASE
-import { firestore } from '@/firebase/client-config';
+import { firestore, Timestamp } from '@/firebase/client-config';
+// import { Timestamp } from '@firebase/firestore';;
 
 export const useCollectionSnapshot = (collectionRef: string) => {
   //STATE
@@ -20,8 +21,12 @@ export const useCollectionSnapshot = (collectionRef: string) => {
         const docs = snapshot.docs.map(doc => ({
           ...doc.data(),
           id: doc.id,
-          createdAt: doc.data()?.createdAt ?? null,
-          lastUpdated: doc.data()?.lastUpdated ?? null,
+          // createdAt: doc.data()?.createdAt ?? null,
+          // // lastUpdated: doc.data()?.lastUpdated ?? null,
+          createdAt: doc.data().createdAt.toDate() ?? null,
+          lastUpdated: doc.data().lastUpdated.toDate() ?? null,
+          // createdAt: Timestamp.fromDate(new Date(doc.data()?.createdAt ?? null)),
+          // lastUpdated: Timestamp.fromDate(new Date(doc.data()?.lastUpdated ?? null)),
         }));
 
         setData(docs);

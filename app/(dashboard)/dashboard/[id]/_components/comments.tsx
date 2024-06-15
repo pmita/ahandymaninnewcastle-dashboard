@@ -31,7 +31,6 @@ export const Comments = ({
 }: CommentsProps) => {
   if (!comments) return <h1 className="text-center font-bold text-primary">No comments yet</h1>;
 
-  // console.log(comments)
   return (
     <>
       <h1 className="font-bold text-primary">Comments</h1>
@@ -40,7 +39,7 @@ export const Comments = ({
           <CardDescription>{comment.content}</CardDescription>
           <CardFooter className="flex-row justify-between">
             <Status status={comment.status} />
-            {/* <FormatedTime time={comment.createdAt} /> */}
+            <FormatedTime time={comment.createdAt} />
           </CardFooter>
         </Card>
       ))}

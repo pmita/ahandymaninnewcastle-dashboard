@@ -38,9 +38,9 @@ export interface IComments {
 
 export type firestoreComment = {
   content: string;
-  createdAt: number | string;
+  createdAt: Date | string | null;
   status: queryStatus;
-  lastUpdated: number | string;
+  lastUpdated: Date | string | null;
   id: string;
 }
 
