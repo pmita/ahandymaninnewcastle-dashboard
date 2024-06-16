@@ -31,3 +31,21 @@ export type queryComments = {
   status: queryStatus;
   createdAt: number | string;
 }
+
+export interface IComments {
+  comments: firestoreComment[];
+}
+
+export type firestoreComment = {
+  content: string;
+  createdAt: Date | string | null;
+  status: queryStatus;
+  lastUpdated: Date | string | null;
+  id: string;
+}
+
+// FILTERS
+export interface IFirestoreFilters {
+  status?: string | null;
+  sort?: string | null;
+}

@@ -2,8 +2,10 @@
 import { firestore } from "@/firebase/server/config";
 // UTILS
 import { applyFirestoreFilters } from "@/utils/firestore";
+// TYPES
+import { IFirestoreFilters } from "@/types/firestore";
 
-export const getCollectionData = async (collectionRef: string, filters = { status: null, sort: null }) => {
+export const getCollectionData = async (collectionRef: string, filters: IFirestoreFilters) => {
   const docsRef = firestore.collection(collectionRef);
 
   const docsWithFilters = applyFirestoreFilters(docsRef, filters);
@@ -12,28 +14,22 @@ export const getCollectionData = async (collectionRef: string, filters = { statu
   const data = snapshot.docs.map((doc: any) => ({
     id: doc.id,
     ...doc.data(),
-    createdAt: doc.data().createdAt.toDate(),
-    lastUpdated: doc.data().lastUpdated.toDate(),
+    createdAt: doc.data().createdAt.toDate() ?? null,
+    lastUpdated: doc.data().lastUpdated.toDate() ?? null,
   }));
-  return data;
+  return data as FirebaseFirestore.DocumentData[] | [];
 }
 
-export const getCollectionDocument = async (collectionRef: string, documentRef: string) => {
+export const getDocumentData = async (collectionRef: string, documentRef: string) => {
   const docRef = firestore.collection(collectionRef).doc(documentRef);
 
   const snapshot = await docRef.get();
   const docData = snapshot.data();
-
-  const docDataWithFormatedComments =  docData?.comments ? docData?.comments.map((comment: any) => ({
-    ...comment,
-    createdAt: comment.createdAt.toDate() ?? null,
-  })) : [];
 
   return {
     id: snapshot.id,
     ...docData,
     createdAt: docData?.createdAt.toDate() ?? null,
     lastUpdated: docData?.lastUpdated.toDate() ?? null,
-    comments: docDataWithFormatedComments ?? [],
   } as FirebaseFirestore.DocumentData | null;
 }

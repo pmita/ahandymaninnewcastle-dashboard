@@ -2,7 +2,6 @@
 import { useState } from 'react';
 // FIREBASE
 import { firestore, timestamp } from '@/firebase/client-config';
-import firebase from 'firebase/app';
 
 export const useFirestore = () => {
   // STATE & HOOKS
@@ -28,6 +27,10 @@ export const useFirestore = () => {
       if(!response) {
         throw new Error('Could not add document');
       }
+
+      await response.update({
+        id: response.id 
+      })
 
       setHasQueryBeenSent(true);
     }catch(err) {
@@ -57,33 +60,11 @@ export const useFirestore = () => {
     }
   }
 
-  const addComment = async (collection:string, documentId: string, data: object) => {
-    setIsLoading(true);
-    setError(null);
-
-    const docRef = firestore.collection(collection).doc(documentId);
-
-    try {
-      await docRef.set({
-        comments: firebase.firestore.FieldValue.arrayUnion({
-          ...data,
-          createdAt: firebase.firestore.Timestamp.now(),
-        })
-      }, { merge: true })
-    }catch(err) {
-      setError((err as Error).message);
-    }finally {
-      setIsLoading(false);
-    }
-  
-  }
-
   return { 
     isLoading, 
     hasQueryBeenSent, 
     error, 
     addDocument,
     updateDocument,
-    addComment
   };
 }

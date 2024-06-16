@@ -1,8 +1,13 @@
+// NEXT
+import Link from "next/link"
 // COMPONENTS
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { FormatedTime } from "@/components/formated-time"
 import { Status } from "@/components/status"
-import { ContainerCTA } from "./container-cta"
+import { QuickViewButton } from "./quick-view"
+import { buttonVariants } from "@/components/ui/button"
+// UTILS
+import { cn } from "@/utils/helpers"
 
 
 export const TableContainer = ({ data }: { data: any }) => {
@@ -24,8 +29,14 @@ export const TableContainer = ({ data }: { data: any }) => {
                         <TableCell className="text-center">
                             <Status status={item.status} />
                         </TableCell>
-                        <TableCell className="flex flex-row gap-2">
-                            <ContainerCTA itemId={item.id} />
+                        <TableCell className="flex flex-row justify-center gap-2">
+                            <Link 
+                                className={cn(buttonVariants({ variant: 'primary', size: 'sm' }))}
+                                href={`/dashboard/${item.id}`}
+                            >
+                                Edit
+                            </Link>
+                            <QuickViewButton item={item} />
                         </TableCell>
                     </TableRow>
                 ))}

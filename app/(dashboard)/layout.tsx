@@ -2,7 +2,7 @@
 import Link from "next/link";
 // COMPONENTS
 import { AuthCheck } from "@/components/auth-check";
-import { SideMenu } from "./_components/side-menu";
+import { SideMenu } from "./dashboard/_components/side-menu";
 import { buttonVariants } from "@/components/ui/button";
 // UTILS
 import { cn } from "@/utils/helpers";

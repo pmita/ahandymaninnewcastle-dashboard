@@ -6,7 +6,7 @@ import { firestore } from '@/firebase/client-config';
 
 export const useDocumentSnapshot = (collectionRef: string, docId: string) => {
   //STATE
-  const [document, setDocument] = useState<any>(null);
+  const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | string | null>(null);
 
@@ -16,11 +16,11 @@ export const useDocumentSnapshot = (collectionRef: string, docId: string) => {
 
     const unsubscribe = firestore.collection(collectionRef).doc(docId).onSnapshot((doc) => {
       if(doc.exists) {
-        setDocument({
+        setData({
           ...doc.data(),
           id: doc.id,
-          createdAt: doc.data()?.createdAt.toDate(),
-          lastUpdated: doc.data()?.createdAt.toDate()
+          createdAt: doc.data()?.createdAt ?? null,
+          lastUpdated: doc.data()?.createdAt ?? null,
         });
 
         setIsLoading(false);
@@ -37,6 +37,6 @@ export const useDocumentSnapshot = (collectionRef: string, docId: string) => {
     return () => unsubscribe();
   }, [collectionRef, docId]);
 
-  return { document, isLoading, error };
+  return { data, isLoading, error };
 }
 
