@@ -47,7 +47,7 @@ export const QuickViewButton = ({ item }: { item: any }) => {
 
 export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => void}) => {
     // STATE && VARIABLES
-    const { data: realtimeComments } = useCollectionSnapshot(`queries/${item.id}/comments`);
+    const { data: realtimeComments } = useCollectionSnapshot(`queries/${item.id}/comments`, { sort: 'asc' });
 
     return (
         <OverlayPanelWrapper>
@@ -71,7 +71,7 @@ export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => v
                                 itemId={item.id}
                                 status={item.status}
                                 comments={realtimeComments}
-                                canAddComments={false}
+                                canAddComments={true}
                             />
                         </div>
                     </OverlayPanelDescription>
