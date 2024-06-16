@@ -1,10 +1,11 @@
 // REACT
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SetStateAction } from 'react';
 // FIREBASE
-import { firestore, Timestamp } from '@/firebase/client-config';
-// import { Timestamp } from '@firebase/firestore';;
+import { firestore } from '@/firebase/client-config';
+import { applyFirestoreFilters } from '@/utils/firestore';
+import { IFirestoreFilters } from '@/types/firestore';
 
-export const useCollectionSnapshot = (collectionRef: string) => {
+export const useCollectionSnapshot = (collectionRef: string, filters: IFirestoreFilters) => {
   //STATE
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,19 +15,17 @@ export const useCollectionSnapshot = (collectionRef: string) => {
     setIsLoading(true);
     setError(null);
 
-    const unsubscribe = firestore.collection(collectionRef)
-    .orderBy('createdAt', 'asc')
-    .onSnapshot((snapshot) => {
+    const docsRef = firestore.collection(collectionRef);
+    const docsWithFilters = applyFirestoreFilters(docsRef, filters);
+
+    const unsubscribe = docsWithFilters
+    .onSnapshot((snapshot: { empty: boolean; docs: FirebaseFirestore.DocumentData[]; }) => {
       if(!snapshot.empty) {
-        const docs = snapshot.docs.map(doc => ({
+        const docs = snapshot.docs.map((doc: FirebaseFirestore.DocumentData) => ({
           ...doc.data(),
           id: doc.id,
-          // createdAt: doc.data()?.createdAt ?? null,
-          // // lastUpdated: doc.data()?.lastUpdated ?? null,
-          createdAt: doc.data().createdAt.toDate() ?? null,
-          lastUpdated: doc.data().lastUpdated.toDate() ?? null,
-          // createdAt: Timestamp.fromDate(new Date(doc.data()?.createdAt ?? null)),
-          // lastUpdated: Timestamp.fromDate(new Date(doc.data()?.lastUpdated ?? null)),
+          createdAt: doc.data().createdAt ?? null,
+          lastUpdated: doc.data().lastUpdated ?? null,
         }));
 
         setData(docs);
@@ -36,7 +35,7 @@ export const useCollectionSnapshot = (collectionRef: string) => {
         setError('Collection is empty');
         setIsLoading(false);
       }
-    }, (error) => {
+    }, (error: SetStateAction<string | Error | null>) => {
       setError(error);
       setIsLoading(false);
     })

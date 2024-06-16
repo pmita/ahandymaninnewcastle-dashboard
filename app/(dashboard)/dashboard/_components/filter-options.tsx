@@ -9,7 +9,7 @@ import { OptionTab } from "./option-tab";
 
 
 export const FilterOptions = ({ itemStatus }: { itemStatus: string }) => {
-  // STATE
+  // STATE & VARIABLES
   const [status, setStatus] = useState(itemStatus || 'ALL');
   const searchParams = useSearchParams();
   const pathname = usePathname();

@@ -6,11 +6,11 @@ import { applyFirestoreFilters } from "@/utils/firestore";
 import { IFirestoreFilters } from "@/types/firestore";
 
 export const getCollectionData = async (collectionRef: string, filters: IFirestoreFilters) => {
-  const docsRef = firestore.collection(collectionRef).orderBy('createdAt', 'asc');;
+  const docsRef = firestore.collection(collectionRef);
 
   const docsWithFilters = applyFirestoreFilters(docsRef, filters);
 
-  const snapshot = await docsRef.get();
+  const snapshot = await docsWithFilters.get();
   const data = snapshot.docs.map((doc: any) => ({
     id: doc.id,
     ...doc.data(),
