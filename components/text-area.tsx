@@ -20,7 +20,7 @@ export default function TextAreaField({
       )}
 
       <textarea
-        className="w-full border-solid border-[0.3rem] border-primary p-4 rounded-[6px]"
+        className="w-full border-solid border-[0.3rem] border-primary p-4 rounded-[6px] text-primary"
         id={name}
         placeholder={placeholder}
         {...register(name, validationSchema)}
