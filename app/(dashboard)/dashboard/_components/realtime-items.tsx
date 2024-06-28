@@ -1,7 +1,9 @@
 "use client"
 
+// NEXT
+import { useSearchParams } from "next/navigation"
 // REACT
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 // COMPONENTS
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ToggleContainer } from "./toggle-container"
@@ -15,12 +17,18 @@ import { IFirestoreItem } from "@/types/firestore"
 const TEN_MORE_ITEMS = 10;
 
 export const RealtimeItems = ({ data }: { data: IFirestoreItem[] | null } ) => {
+    const searchParams = useSearchParams();
+    const status = searchParams.get('status');
     const [items, setItems] = useState<IFirestoreItem[] | null>(data);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [error, setError] = useState<Error | string | null>(null);
 
     if (!items || !items.length) return null;
+
+    useEffect(() => {
+        setItems(data);
+    }, [status]);
 
     // EVENTS
     const loadMoreItems = useCallback(async () => {
