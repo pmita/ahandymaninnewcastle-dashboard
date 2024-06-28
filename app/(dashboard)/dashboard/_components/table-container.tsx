@@ -8,9 +8,14 @@ import { QuickViewButton } from "./quick-view"
 import { buttonVariants } from "@/components/ui/button"
 // UTILS
 import { cn } from "@/utils/helpers"
+// TYPES
+import { IFirestoreItem } from "@/types/firestore"
 
 
-export const TableContainer = ({ data }: { data: any }) => {
+export const TableContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
+
+    if (!data) return null;
+    
     return (
         <Table className="divide-y-2 divide-gray-200 bg-white">
             <TableContainerHeader />

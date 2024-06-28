@@ -7,11 +7,14 @@ import { Comments } from "./comments";
 import { useDocumentSnapshot } from "@/hooks/useDocumentSnapshot";
 import { useCollectionSnapshot } from "@/hooks/useCollectionSnapshot";
 // TYPES
-import { firestoreComment, queryDocumentType } from "@/types/firestore"
+import { firestoreComment, IFirestoreItem } from "@/types/firestore"
 
+type RealtimeItemProps = {
+  item: IFirestoreItem,
+  comments: firestoreComment[]
+}
 
-
-export const RealTimeContainer = ({ item, comments }: { item: queryDocumentType, comments: firestoreComment[] }) => {
+export const RealtimeItem = ({ item, comments }: RealtimeItemProps) => {
   // STATE && VARIABLES
   const { data: realtimeItem } = useDocumentSnapshot('queries', item.id);
   const { data: realtimeComments } = useCollectionSnapshot(`queries/${item.id}/comments`, { sort: 'asc' });

@@ -19,8 +19,8 @@ export const useDocumentSnapshot = (collectionRef: string, docId: string) => {
         setData({
           ...doc.data(),
           id: doc.id,
-          createdAt: doc.data()?.createdAt ?? null,
-          lastUpdated: doc.data()?.createdAt ?? null,
+          createdAt: doc.data()?.createdAt.toMillis() ?? null,
+          lastUpdated: doc.data()?.lastUpdated.toMillis() ?? null,
         });
 
         setIsLoading(false);

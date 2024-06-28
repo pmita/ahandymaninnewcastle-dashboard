@@ -11,6 +11,12 @@ export const truncate = (str: string, length: number) => {
   return `${str.slice(0, length)}...`;
 };
 
+export const formatDateFromMillis = (millis: number) => {
+  return new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'medium',
+  }).format(new Date(millis));
+};
+
 export const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'medium',

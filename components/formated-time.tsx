@@ -1,9 +1,10 @@
 // REACT
 import React from 'react';
 // UTILS
-import { cn, formatDate } from '@/utils/helpers';
+import { cn, formatDate, formatDateFromMillis } from '@/utils/helpers';
 
-type TimeInput = Date | string | null;
+
+type TimeInput = number | string;
 
 type FormatedTimeProps = {
   time: TimeInput;
@@ -12,9 +13,11 @@ type FormatedTimeProps = {
 
 export const FormatedTime = ({ time, className }: FormatedTimeProps) => {
 
+  if (!time) return null;
+
   return (
     <time className={cn("text-xs text-neutral", className)}>
-      {formatDate(time as Date)}
+      {typeof time === 'number' ? formatDateFromMillis(time) : formatDate(time as unknown as Date)}
     </time>
-  );
+  )
 };

@@ -8,8 +8,13 @@ import { FormatedTime } from "@/components/formated-time";
 import { QuickViewButton } from "./quick-view";
 // UTILS
 import { cn, truncate } from "@/utils/helpers";
+// TYPES
+import { IFirestoreItem } from "@/types/firestore";
 
-export const GridContainer = ({ data }: { data: any }) => {
+export const GridContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
+
+  if (!data) return null;
+  
   return (
     <div className="grid grid-cols-1 auto-rows-[285px] gap-4 lg:grid-cols-2 lg:gap-8 mt-4">
       {data.map((item: any) => (
@@ -32,7 +37,6 @@ export const GridContainer = ({ data }: { data: any }) => {
           </CardFooter>
         </Card>
       ))}
-
     </div>
   )
 }

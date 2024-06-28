@@ -1,15 +1,13 @@
-
-export type queryDocumentType = {
+export interface IFirestoreItem extends FirebaseFirestore.DocumentData {
   id: string;
   email: string;
   fullName: string;
   location?: string;
   mobile: string;
   additionalInfo?: string;
+  status: queryStatus;
   createdAt: number | string;
   lastUpdated: number | string;
-  status: queryStatus;
-  comments?: queryComments[] | [];
 }
 
 export enum queryStatus {
@@ -17,30 +15,15 @@ export enum queryStatus {
   PROGRESSED = 'PROGRESSED',
   COMPLETED = 'COMPLETED',
 }
-
-export type queryCommentType = {
-  content: string;
-  createdAt: number | string;
-  status: queryStatus;
-  id: string;
-}
-
-export type queryComments = {
-  id: string;
-  content: string;
-  status: queryStatus;
-  createdAt: number | string;
-}
-
 export interface IComments {
   comments: firestoreComment[];
 }
 
 export type firestoreComment = {
   content: string;
-  createdAt: Date | string | null;
+  createdAt: number | string;
   status: queryStatus;
-  lastUpdated: Date | string | null;
+  lastUpdated: number | string;
   id: string;
 }
 
