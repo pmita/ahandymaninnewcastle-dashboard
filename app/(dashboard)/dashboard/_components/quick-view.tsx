@@ -19,7 +19,7 @@ import { useCollectionSnapshot } from "@/hooks/useCollectionSnapshot";
 // UTILS
 import { cn } from "@/utils/helpers";
 // TYPES
-import { queryDocumentType } from "@/types/firestore";
+import { IFirestoreItem } from "@/types/firestore";
 
 export const QuickViewButton = ({ item }: { item: any }) => {
     // STATE && VARIABLES
@@ -63,7 +63,7 @@ export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => v
                                 Close
                             </Button>
                         </OverlayPanelTitle>
-                        <ItemInfo itemData={item as queryDocumentType} />
+                        <ItemInfo itemData={item as IFirestoreItem} />
                     </OverlayPanelHeader>
                     <OverlayPanelDescription>
                         <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">

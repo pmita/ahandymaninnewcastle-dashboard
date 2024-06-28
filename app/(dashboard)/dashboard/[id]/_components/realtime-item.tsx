@@ -7,10 +7,10 @@ import { Comments } from "./comments";
 import { useDocumentSnapshot } from "@/hooks/useDocumentSnapshot";
 import { useCollectionSnapshot } from "@/hooks/useCollectionSnapshot";
 // TYPES
-import { firestoreComment, queryDocumentType } from "@/types/firestore"
+import { firestoreComment, IFirestoreItem } from "@/types/firestore"
 
 type RealtimeItemProps = {
-  item: queryDocumentType,
+  item: IFirestoreItem,
   comments: firestoreComment[]
 }
 

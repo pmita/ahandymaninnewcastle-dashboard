@@ -1,10 +1,10 @@
 // COMPONENTS
 import { Card, CardDescription } from "@/components/ui/card";
-import { queryDocumentType } from "@/types/firestore";
+import { IFirestoreItem } from "@/types/firestore";
 
 export const ItemInfo = ({
   itemData
-}: { itemData: queryDocumentType}) => {
+}: { itemData: IFirestoreItem}) => {
 
   return (
     <div className="rounded-lg bg-secondary flex flex-col justify-center items-stretch p-2 lg:p-4">
