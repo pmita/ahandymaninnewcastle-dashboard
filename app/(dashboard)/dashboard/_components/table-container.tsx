@@ -1,7 +1,14 @@
 // NEXT
 import Link from "next/link"
 // COMPONENTS
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+    Table,
+    TableBody, 
+    TableCell, 
+    TableHead,
+    TableHeader,
+    TableRow
+} from "@/components/ui/table"
 import { FormatedTime } from "@/components/formated-time"
 import { Status } from "@/components/status"
 import { QuickViewButton } from "./quick-view"
@@ -18,7 +25,7 @@ export const TableContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
     
     return (
         <Table className="divide-y-2 divide-gray-200 bg-white">
-            <TableContainerHeader />
+            <ContainerHeader />
             <TableBody>
                 {data && data.map((item: any) => (
                     <TableRow key={item.id}>
@@ -50,7 +57,7 @@ export const TableContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
     )
 }
 
-export const TableContainerHeader = () => {
+export const ContainerHeader = () => {
     return (
         <TableHeader>
             <TableRow>

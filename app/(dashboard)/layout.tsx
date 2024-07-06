@@ -2,7 +2,7 @@
 import Link from "next/link";
 // COMPONENTS
 import { AuthCheck } from "@/components/auth-check";
-import { SideMenu } from "./dashboard/_components/side-menu";
+import { TopNavbar } from "../../components/top-navbar";
 import { buttonVariants } from "@/components/ui/button";
 // UTILS
 import { cn } from "@/utils/helpers";
@@ -22,7 +22,7 @@ export default function DashboardLayout({
       </>
     )}>
     <div className="container h-full w-full flex flex-col justify-start items-center">
-      <SideMenu />
+      <TopNavbar />
       <div className="container min-h-[90dvh] rounded-lg bg-gray-200 lg:col-span-2 p-4 lg:p-8">
         {children}
       </div>
