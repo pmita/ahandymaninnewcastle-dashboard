@@ -4,7 +4,7 @@
 import { createContext, useState, useEffect } from "react";
 // FIREBASE
 import firebase from "firebase/app";
-import { auth } from "@/firebase/client-config";
+import { auth } from "@/firebase/client/client-config";
 
 type AuthContextType = {
   authedUser: firebase.User | null;

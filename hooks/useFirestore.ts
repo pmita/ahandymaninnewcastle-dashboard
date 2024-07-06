@@ -1,7 +1,7 @@
 // REACT
 import { useState } from 'react';
 // FIREBASE
-import { firestore, timestamp } from '@/firebase/client-config';
+import { firestore, timestamp } from '@/firebase/client/config';
 
 export const useFirestore = () => {
   // STATE & HOOKS

@@ -8,7 +8,7 @@ import { useState, useCallback, useEffect } from "react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ToggleLayout } from "./toggle-layout"
 // FIREBASE
-import { firestore, fromMillis } from "@/firebase/client-config"
+import { firestore, fromMillis } from "@/firebase/client/config"
 // UTILS
 import { cn } from "@/utils/helpers"
 // TYPES
