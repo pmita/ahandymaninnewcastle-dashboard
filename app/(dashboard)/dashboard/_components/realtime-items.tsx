@@ -6,9 +6,9 @@ import { useSearchParams } from "next/navigation"
 import { useState, useCallback, useEffect } from "react"
 // COMPONENTS
 import { Button, buttonVariants } from "@/components/ui/button"
-import { ToggleContainer } from "./toggle-container"
+import { ToggleLayout } from "./toggle-layout"
 // FIREBASE
-import { firestore, fromMillis } from "@/firebase/client-config"
+import { firestore, fromMillis } from "@/firebase/client/config"
 // UTILS
 import { cn } from "@/utils/helpers"
 // TYPES
@@ -17,17 +17,20 @@ import { IFirestoreItem } from "@/types/firestore"
 const TEN_MORE_ITEMS = 10;
 
 export const RealtimeItems = ({ data }: { data: IFirestoreItem[] | null } ) => {
-    const searchParams = useSearchParams();
-    const status = searchParams.get('status');
+    // STATE && VARIABLES
     const [items, setItems] = useState<IFirestoreItem[] | null>(data);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const [error, setError] = useState<Error | string | null>(null);
+    const searchParams = useSearchParams();
+    const status = searchParams.get('status');
 
     if (!items || !items.length) return null;
 
+    // USE EFFECTS
     useEffect(() => {
-        setItems(data);
+        setItems(data)
+        setHasMore(true)
     }, [status]);
 
     // EVENTS
@@ -70,7 +73,7 @@ export const RealtimeItems = ({ data }: { data: IFirestoreItem[] | null } ) => {
 
     return (
         <>
-            <ToggleContainer data={items} />
+            <ToggleLayout data={items} />
 
             <section className="flex flex-col justify-center items-center pt-5">
                 {hasMore 

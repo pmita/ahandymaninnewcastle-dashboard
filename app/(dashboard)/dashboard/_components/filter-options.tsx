@@ -16,7 +16,7 @@ export const FilterOptions = ({ itemStatus }: { itemStatus: string }) => {
   const { replace } = useRouter();
 
   // EVENTS
-  const updateItemsQuery = useCallback((queryStatus: string) => {
+  const updateStatusParams = useCallback((queryStatus: string) => {
     const params = new URLSearchParams(searchParams);
 
     switch(queryStatus) {
@@ -43,7 +43,7 @@ export const FilterOptions = ({ itemStatus }: { itemStatus: string }) => {
       {['ALL', 'INITIAL', 'PROGRESSED', 'COMPLETED'].map((option: string) => (
         <OptionTab
           key={option}
-          onClick={() => updateItemsQuery(option)}
+          onClick={() => updateStatusParams(option)}
           option={status}
           currentOption={option}
         />

@@ -1,43 +1,45 @@
 "use client"
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 // COMPONENTS
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Comments } from "../[id]/_components/comments";
 import { ItemInfo } from "../[id]/_components/item-info";
-import { 
-    OverlayPanelContainer, 
-    OverlayPanelDescription, 
-    OverlayPanelHeader, 
-    OverlayPanelOverlay, 
-    OverlayPanelSection, 
-    OverlayPanelTitle, 
-    OverlayPanelWrapper 
-} from "@/components/ui/overlay-panel";
 // HOOKS
 import { useCollectionSnapshot } from "@/hooks/useCollectionSnapshot";
 // UTILS
 import { cn } from "@/utils/helpers";
 // TYPES
 import { IFirestoreItem } from "@/types/firestore";
+import { Dialog, DialogHeader, DialogPanel, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-export const QuickViewButton = ({ item }: { item: any }) => {
+type QuickViewProps = {
+    item: IFirestoreItem
+}
+
+type QuickViewDialogProps = {
+    item: IFirestoreItem
+    isOpen: boolean
+    toggleDialog: (option: boolean) => void
+}
+
+export const QuickView = ({ item }: QuickViewProps) => {
     // STATE && VARIABLES
     const [isOpen, setIsOpen]= useState(false);
 
     // EVENTS
-    const handleClick= useCallback(() => 
-        setIsOpen(!isOpen)
-    , [isOpen, setIsOpen]);
+    const toggleDialog = useCallback((option: boolean) => {
+        setIsOpen(option)
+    }, [setIsOpen])
 
     return (
         <>
             {isOpen && (
-                <QuickViewDialog item={item} onClick={handleClick} />
+                <QuickViewDialog item={item} isOpen={isOpen} toggleDialog={toggleDialog} />
             )}
             <Button 
                 className={cn(buttonVariants({ variant: "primaryOutlined", size: "sm" }))}
-                onClick={handleClick}
+                onClick={() => toggleDialog(true)}
             >
                 Quick View
             </Button>
@@ -45,38 +47,45 @@ export const QuickViewButton = ({ item }: { item: any }) => {
     )
 }
 
-export const QuickViewDialog = ({ item, onClick }: { item: any, onClick: () => void}) => {
+export const QuickViewDialog = ({ item, isOpen, toggleDialog }: QuickViewDialogProps) => {
     // STATE && VARIABLES
+    const dialogRef = useRef<HTMLDialogElement>(null);
     const { data: realtimeComments } = useCollectionSnapshot(`queries/${item.id}/comments`, { sort: 'asc' });
 
+    // USE EFFECTS
+    useEffect(() => {
+        if(isOpen) {
+            dialogRef.current?.showModal()
+        } else {
+            dialogRef.current?.close()
+        }
+    }, [isOpen,dialogRef])
+
     return (
-        <OverlayPanelWrapper>
-            <OverlayPanelContainer>
-                <OverlayPanelOverlay onClick={onClick} />
-                <OverlayPanelSection>
-                    <OverlayPanelHeader>
-                        <OverlayPanelTitle className="p-4">
-                            <Button 
-                                className={cn(buttonVariants({ variant: "primary" }))}
-                                onClick={onClick}
-                            >
-                                Close
-                            </Button>
-                        </OverlayPanelTitle>
-                        <ItemInfo itemData={item as IFirestoreItem} />
-                    </OverlayPanelHeader>
-                    <OverlayPanelDescription>
-                        <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
-                            <Comments
-                                itemId={item.id}
-                                status={item.status}
-                                comments={realtimeComments}
-                                canAddComments={true}
-                            />
-                        </div>
-                    </OverlayPanelDescription>
-                </OverlayPanelSection>
-            </OverlayPanelContainer>
-        </OverlayPanelWrapper>
+        <Dialog ref={dialogRef}>
+            <DialogPanel>
+                <DialogHeader>
+                    <DialogTitle className="p-4">
+                        <Button 
+                            className={cn(buttonVariants({ variant: "primary" }))}
+                            onClick={() => toggleDialog(false)}
+                        >
+                            Close
+                        </Button>
+                    </DialogTitle>
+                    <ItemInfo itemData={item as IFirestoreItem} />
+                </DialogHeader>
+                <DialogDescription>
+                    <div className="bg-secondary lg:col-span-2 p-4 flex flex-col gap-4">
+                        <Comments
+                            itemId={item.id}
+                            status={item.status}
+                            comments={realtimeComments}
+                            canAddComments={true}
+                        />
+                    </div>
+                </DialogDescription>
+            </DialogPanel>
+        </Dialog>
     )
 }

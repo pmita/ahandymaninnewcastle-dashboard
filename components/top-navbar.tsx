@@ -2,7 +2,6 @@
 
 // NEXT
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 // COMPONENTS
 import { Button, buttonVariants } from '@/components/ui/button';
 // HOOKS
@@ -10,9 +9,8 @@ import { useSignOut } from '@/hooks/useSignOut';
 // UTILS
 import { cn } from '@/utils/helpers';
 
-export const SideMenu = () => {
+export const TopNavbar = () => {
   // STATE && VARIABLES
-  const pathname = usePathname();
   const { signOut } = useSignOut();
 
 

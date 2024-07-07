@@ -1,7 +1,7 @@
 // REACT
 import { useState, useEffect } from 'react';
 // FIREBASE
-import { firestore } from '@/firebase/client-config';
+import { firestore } from '@/firebase/client/config';
 
 
 export const useDocumentSnapshot = (collectionRef: string, docId: string) => {

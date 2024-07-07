@@ -8,13 +8,13 @@ import { TableContainer } from "./table-container";
 // TYPES
 import { IFirestoreItem } from "@/types/firestore";
 
-export const ToggleContainer = ({ data }: { data: IFirestoreItem[] | null } ) => {
+export const ToggleLayout = ({ data }: { data: IFirestoreItem[] | null } ) => {
     // STATE && VARIABLES
     const searchParams = useSearchParams();
     const display = searchParams.get('display');
 
     // EVENTS
-    const renderView = (displayOption: string | null) => {
+    const renderContainerView = (displayOption: string | null) => {
         switch(displayOption) {
             case 'list':
                 return (
@@ -28,5 +28,5 @@ export const ToggleContainer = ({ data }: { data: IFirestoreItem[] | null } ) =>
         }
     }
 
-    return renderView(display);
+    return renderContainerView(display);
 }

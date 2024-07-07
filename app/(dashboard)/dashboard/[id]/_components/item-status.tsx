@@ -11,12 +11,15 @@ import { queryStatus } from "@/types/firestore"
 // UTILS
 import { cn } from "@/utils/helpers"
 
-type ItemStatusProps = {
+interface IItemsStatus extends IStatusForm {
   id: string;
-  status: queryStatus;
 }
 
-export const ItemStatus = ({ id, status }: ItemStatusProps) => {
+interface IStatusForm {
+  status: string;
+}
+
+export const ItemStatus = ({ id, status }: IItemsStatus) => {
   return (
     <>
       <div className="flex flex-row justify-center items-center gap-4">
@@ -29,22 +32,17 @@ export const ItemStatus = ({ id, status }: ItemStatusProps) => {
   )
 }
 
-type UpdateStatusProps = {
-  status: string;
-}
-
-
-export const UpdateStatus = ({ id, status }: ItemStatusProps) => {
+export const UpdateStatus = ({ id, status }: IItemsStatus) => {
   //STATE && VARIABLES
   const { error: updatingError, isLoading, updateDocument } = useFirestore();
-  const { register, handleSubmit, formState: { errors } } = useForm<UpdateStatusProps>({
+  const { register, handleSubmit, formState: { errors } } = useForm<IStatusForm>({
     defaultValues: {
       status
     }
   });
 
   // EVENTS
-  const onSubmit = async ({ status }: UpdateStatusProps) => {
+  const onSubmit = async ({ status }: IStatusForm) => {
     await updateDocument('queries', id, { status });
   }
 

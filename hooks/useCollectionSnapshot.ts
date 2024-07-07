@@ -1,8 +1,10 @@
 // REACT
 import { useState, useEffect, SetStateAction } from 'react';
 // FIREBASE
-import { firestore } from '@/firebase/client-config';
+import { firestore } from '@/firebase/client/config';
+// UTILS
 import { applyFirestoreFilters } from '@/utils/firestore';
+// TYPES
 import { IFirestoreFilters } from '@/types/firestore';
 
 export const useCollectionSnapshot = (collectionRef: string, filters: IFirestoreFilters) => {

@@ -22,12 +22,6 @@ interface SignInFormProps {
   password: string;
 }
 
-interface SignInFormErrors {
-  email: string;
-  password: string;
-
-}
-
 export const SignInForm = () => {
   // STATE && VARIABLES
   const router = useRouter();
@@ -68,7 +62,7 @@ export const SignInForm = () => {
           register={register}
           validationSchema={input.validationSchema}
           placeholder={input.placeholder}
-          error={errors[input.name as keyof SignInFormErrors]?.message}
+          error={errors[input.name as keyof SignInFormProps]?.message}
         />
       ))}
 

@@ -50,7 +50,7 @@ export const Comments = ({
 }
 
 type AddCommentProps = {
-  content: string;
+  comment: string;
 }
 
 export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentStatus: queryStatus }) => {
@@ -58,14 +58,14 @@ export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentS
   const { error: addingError, isLoading, addDocument } = useFirestore();
   const { register, reset, handleSubmit, formState: { errors } } = useForm<AddCommentProps>({
     defaultValues: {
-      content: ''
+      comment: ''
     }
   });
 
   // EVENTS
-  const onSubmit = useCallback(async ({ content }: AddCommentProps) => {
+  const onSubmit = useCallback(async ({ comment }: AddCommentProps) => {
     const commentToAdd = {
-      content,
+      content: comment,
       status: currentStatus,
     }
 
@@ -77,11 +77,11 @@ export const AddComment = ({ itemId, currentStatus }: { itemId: string, currentS
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-start items-start gap-4">
       <TextAreaField
-        name="content"
+        name="comment"
         register={register}
         validationSchema={{ required: 'Please enter some details' }}
         placeholder="Add a comment..."
-        error={errors.content?.message}
+        error={errors.comment?.message}
       />
 
       {addingError && (

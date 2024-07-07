@@ -21,7 +21,7 @@ export const ViewOptions = ({
   const { replace } = useRouter();
 
   // EVENTS
-  const updateDisplayType = useCallback((type: string) => {
+  const updateDisplayParams = useCallback((type: string) => {
     const params = new URLSearchParams(searchParams);
 
     switch(type) {
@@ -43,7 +43,7 @@ export const ViewOptions = ({
       {['grid', 'list'].map((option: string) => (
         <OptionTab
           key={option}
-          onClick={() => updateDisplayType(option)}
+          onClick={() => updateDisplayParams(option)}
           option={display}
           currentOption={option}
         />

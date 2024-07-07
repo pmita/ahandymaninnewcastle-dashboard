@@ -1,7 +1,7 @@
 // DATA
 import { getCollectionData } from '@/data/firestore';
 // COMPONENTS
-import { ViewOptions } from './_components/container-options';
+import { ViewOptions } from './_components/view-options';
 import { FilterOptions } from './_components/filter-options';
 import { RealtimeItems } from './_components/realtime-items';
 import { IFirestoreItem } from '@/types/firestore';

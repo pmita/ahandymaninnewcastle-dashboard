@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 // HOOKS
 import { useAuth } from './useAuth';
 // FIREBASE
-import { auth } from '@/firebase/client-config';
+import { auth } from '@/firebase/client/config';
 
 
 export const useSignOut = () => {
