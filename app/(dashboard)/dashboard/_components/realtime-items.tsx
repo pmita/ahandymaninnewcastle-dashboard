@@ -29,7 +29,8 @@ export const RealtimeItems = ({ data }: { data: IFirestoreItem[] | null } ) => {
 
     // USE EFFECTS
     useEffect(() => {
-        setItems(data);
+        setItems(data)
+        setHasMore(true)
     }, [status]);
 
     // EVENTS
