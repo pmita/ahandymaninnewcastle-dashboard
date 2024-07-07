@@ -34,6 +34,10 @@ interface IOverlayPanel extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
+interface ITestOverlayPanel extends React.HTMLAttributes<HTMLDialogElement> {
+  children?: React.ReactNode;
+}
+
 
 interface IOverlayPanelSectionProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof overlayPanelSectionVariants> {
   children?: React.ReactNode;

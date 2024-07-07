@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card"
 import { buttonVariants } from "@/components/ui/button";
 import { Status } from "@/components/status";
 import { FormatedTime } from "@/components/formated-time";
-import { QuickViewButton } from "./quick-view";
+import { QuickView } from "./quick-view";
 // UTILS
 import { cn, truncate } from "@/utils/helpers";
 // TYPES
@@ -35,7 +35,7 @@ export const GridContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
             >
                 Edit
             </Link>
-            <QuickViewButton item={item} />
+            <QuickView item={item} />
           </CardFooter>
         </Card>
       ))}
