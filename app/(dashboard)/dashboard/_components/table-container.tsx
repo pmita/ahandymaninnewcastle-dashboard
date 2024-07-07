@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table"
 import { FormatedTime } from "@/components/formated-time"
 import { Status } from "@/components/status"
-import { QuickViewButton } from "./quick-view"
+import { QuickView } from "./quick-view"
 import { buttonVariants } from "@/components/ui/button"
 // UTILS
 import { cn } from "@/utils/helpers"
@@ -48,7 +48,7 @@ export const TableContainer = ({ data }: { data: IFirestoreItem[] | null }) => {
                             >
                                 Edit
                             </Link>
-                            <QuickViewButton item={item} />
+                            <QuickView item={item} />
                         </TableCell>
                     </TableRow>
                 ))}
