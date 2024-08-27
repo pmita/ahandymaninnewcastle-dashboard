@@ -14,9 +14,10 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  // STATE
+  // STATE && VARIABLES
   const [authedUser, setAuthedUser] = useState<firebase.User | null>(null);
 
+  // USE EFFECTS
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {

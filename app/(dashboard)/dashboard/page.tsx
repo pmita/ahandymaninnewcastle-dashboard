@@ -1,9 +1,12 @@
+export const dynamic = 'force-dynamic';
+
 // DATA
 import { getCollectionData } from '@/data/firestore';
 // COMPONENTS
 import { ViewOptions } from './_components/view-options';
 import { FilterOptions } from './_components/filter-options';
 import { RealtimeItems } from './_components/realtime-items';
+// TYPES
 import { IFirestoreItem } from '@/types/firestore';
 
 
